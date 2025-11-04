@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sem Roteiros, Só Verdades - Podcast de Fofocas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #000000, #003366, #8B008B);
+            color: #fff;
+            overflow-x: hidden;
+            animation: fadeIn 1.5s ease-in;
+            scroll-behavior: smooth;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(139, 0, 139, 0.3);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid #8B008B;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px #C71585;
+            letter-spacing: 2px;
+        }
+        nav {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.4s ease;
+            padding: 10px 15px;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 139, 0.5), transparent);
+            transition: left 0.5s;
+        }
+        nav a:hover::before {
+            left: 100%;
+        }
+        nav a:hover {
+            color: #C71585;
+            transform: scale(1.1);
+            text-shadow: 0 0 10px #C71585;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background: url('https://share.google/images/JTywnBzd7AqfbixOg') no-repeat center center/cover; 
+            position: relative;
+        }
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 51, 102, 0.8);
+            z-index: 1;
+        }
+        .login-box {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 30px #8B008B;
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            animation: slideUp 1s ease-out, glow 2s infinite alternate;
+            border: 1px solid #C71585;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 30px #8B008B; }
+            to { box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 40px #C71585; }
+        }
+        .login-box h2 {
+            color: #C71585;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-shadow: 0 0 10px #C71585;
+        }
+        .login-box p {
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .by-manel {
+            font-size: 1em;
+            color: #C71585;
+            margin-top: 25px;
+            font-weight: 300;
+            text-shadow: 0 0 5px #C71585;
+        }
+        input[type="password"], input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #003366;
+            border-radius: 15px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+        input[type="password"]:focus, input[type="text"]:focus {
+            border-color: #8B008B;
+            outline: none;
+            box-shadow: 0 0 10px #C71585, inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+        button {
+            background: linear-gradient(45deg, #003366, #8B008B);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        button:hover::before {
+            left: 100%;
+        }
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(139, 0, 139, 0.5);
+        }
+        .content {
+            display: none;
+            padding: 60px 20px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in;
+        }
+        .content.show {
+            display: block;
+        }
+        .section {
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(139, 0, 139, 0.2);
+            backdrop-filter: blur(15px);
+            max-width: 1200px;
+            border: 1px solid #8B008B;
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .section h2 {
+            color: #C71585;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            text-shadow: 0 0 15px #C71585;
+        }
+        .home-image {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 20px #8B008B;
+            transition: transform 0.3s ease;
+        }
+        .home-image:hover {
+            transform: scale(1.02);
+        }
+        .episode {
+            display: inline-block;
+            margin: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 20px;
+            width: 300px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border: 1px solid #003366;
+            position: relative;
+            overflow: hidden;
+        }
+        /* ... outros estilos de episódio ... */
+        
+        /* ESTILOS DO CHAT */
+        .chat-container {
+            max-height: 350px;
+            overflow-y: auto;
+            border: 1px solid #8B008B;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            text-align: left;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            background: rgba(139, 0, 139, 0.2); /* Membro */
+            border-left: 3px solid #C71585;
+        }
+        .chat-message.admin-msg {
+            background: rgba(0, 51, 102, 0.5); /* Admin */
+            border-left: 3px solid #00DDFF;
+        }
+        .chat-message strong {
+            color: #00DDFF; /* Cor do nome do Membro */
+            font-weight: 700;
+            display: block;
+        }
+        .chat-message.admin-msg strong {
+            color: #C71585; /* Cor do nome do Admin */
+        }
+        /* Fim estilos CHAT */
+
+        /* ... outros estilos de footer e media queries ... */
+        footer {
+            background: rgba(0, 0, 0, 0.95);
+            text-align: center;
+            padding: 25px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            backdrop-filter: blur(15px);
+            border-top: 2px solid #8B008B;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2em; }
+            .section { padding: 20px; }
+            .episode { width: 250px; margin: 10px; }
+            .admin-options .section button {
+                width: 90%;
+                display: block;
+                margin: 15px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-microphone"></i> Sem Roteiros, Só Verdades</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#chat">Chat Ao Vivo</a>
+            <a href="#episodios">Episódios</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <div class="login-container" id="login">
+        <div class="login-box">
+            <h2>Entre no Mundo das Fofocas! <i class="fas fa-heart"></i></h2>
+            <p>Seja bem-vindo(a)!</p>
+            <input type="text" id="nickname" placeholder="Seu Nick/Nome (Ex: Fofoqueiro nº1)" required>
+            <input type="password" id="password" placeholder="Senha (Membro ou Admin)">
+            <button onclick="login()">Entrar <i class="fas fa-arrow-right"></i></button>
+            <p class="by-manel">by manel</p>
+        </div>
+    </div>
+
+    <div class="content" id="user-content">
+        <section id="home" class="section">
+            <h2>Bem-vindo ao Podcast Mais Fofoqueiro! <i class="fas fa-fire"></i></h2>
+            <p>Olá, <span id="display-nickname" style="color: #00DDFF;">Membro</span>! Aqui falamos mal dos outros sem piedade!</p>
+            <img src="https://share.google/images/ZuKwzTP4kFMqgWUK0" alt="Imagem Inicial do Podcast" class="home-image">
+        </section>
+        
+        <section id="chat" class="section">
+            <h2>Chat Ao Vivo <i class="fas fa-comments"></i></h2>
+            <p>Participe da fofoca! O chat atualiza automaticamente a cada 3 segundos.</p>
+            <div id="member-chat-display" class="chat-container">
+                </div>
+            
+            <form id="member-chat-form">
+                <div class="form-group">
+                    <input type="text" id="member-chat-input" placeholder="Sua mensagem..." required>
+                </div>
+                <button type="submit">Enviar Mensagem <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </section>
+
+        <section id="episodios" class="section">
+            </section>
+
+        <section id="sobre" class="section">
+            </section>
+
+        <section id="contato" class="section">
+            </section>
+    </div>
+
+    <div class="content admin-options" id="admin-content">
+        <section id="admin-main-section" class="section">
+            <h2>Painel de Admin <i class="fas fa-cog"></i></h2>
+            <p>Bem-vindo, Admin <span id="display-admin-nickname" style="color: #C71585;"></span>! Gerencie o podcast.</p>
+            <button id="chat-btn">Chat Ao Vivo <i class="fas fa-comment-dots"></i></button>
+            <button id="add-episode-btn">Adicionar Novo Episódio <i class="fas fa-plus"></i></button>
+            <button id="edit-episodes-btn">Editar Episódios Existentes <i class="fas fa-edit"></i></button>
+            <button id="view-stats-btn">Ver Estatísticas <i class="fas fa-chart-bar"></i></button>
+        </section>
+
+        <section id="chat-admin-section" class="section" style="display: none;">
+            <h2>Chat Admin <i class="fas fa-headset"></i></h2>
+            <p>O chat atualiza automaticamente a cada 3 segundos.</p>
+            
+            <div id="admin-chat-display" class="chat-container">
+                </div>
+
+            <form id="chat-form">
+                <div class="form-group">
+                    <input type="text" id="chat-input" placeholder="Mensagem do Admin (e pressione Enter)" required>
+                </div>
+                <button type="submit">Enviar como Admin <i class="fas fa-paper-plane"></i></button>
+                <button type="button" id="clear-chat-btn" class="delete-btn">Limpar Histórico <i class="fas fa-trash"></i></button>
+                <button type="button" id="cancel-chat-btn" class="secondary-btn">Voltar</button>
+            </form>
+        </section>
+
+        <section id="add-episode-section" class="section" style="display: none;">
+            <h2>Adicionar Novo Episódio <i class="fas fa-podcast"></i></h2>
+            <form id="episode-form">
+                <div class="form-group">
+                    <label for="episode-title">Nome do Episódio:</label>
+                    <input type="text" id="episode-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="episode-description">Resumo do Episódio:</label>
+                    <textarea id="episode-description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="episode-image">URL da Imagem (Capa):</label>
+                    <input type="url" id="episode-image" required value="https://via.placeholder.com/300x200?text=NOVO+EP">
+                    <small>URL de uma imagem hospedada. O valor padrão é um placeholder.</small>
+                </div>
+                <button type="submit">Publicar Episódio <i class="fas fa-upload"></i></button>
+                <button type="button" id="cancel-add-btn" class="secondary-btn">Cancelar</button>
+            </form>
+        </section>
+        
+        <section id="search-edit-section" class="section" style="display: none;">
+            <h2>Buscar Episódio para Editar/Apagar <i class="fas fa-search"></i></h2>
+            <form id="search-episode-form">
+                <div class="form-group">
+                    <label for="search-title">Digite o Nome Exato do Episódio:</label>
+                    <input type="text" id="search-title" required placeholder="Ex: Vizinhos escandalosos">
+                </div>
+                <button type="submit">Buscar <i class="fas fa-search-plus"></i></button>
+                <button type="button" id="cancel-search-btn" class="secondary-btn">Cancelar</button>
+            </form>
+
+            <form id="edit-form" style="display: none; margin-top: 40px;">
+                <hr style="border-color: #8B008B;">
+                <h3>Editando: <span id="current-edit-title" style="color: #C71585;"></span></h3>
+                <div class="form-group">
+                    <label for="edit-title">Novo Título:</label>
+                    <input type="text" id="edit-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-description">Nova Descrição:</label>
+                    <textarea id="edit-description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-image">Nova URL da Capa:</label>
+                    <input type="url" id="edit-image" required>
+                </div>
+                <input type="hidden" id="original-title-key"> 
+                
+                <button type="submit">Salvar Edição <i class="fas fa-save"></i></button>
+                <button type="button" id="delete-episode-btn" class="delete-btn">Apagar Episódio <i class="fas fa-trash"></i></button>
+                <button type="button" id="cancel-edit-form-btn" class="secondary-btn">Cancelar Edição</button>
+            </form>
+        </section>
+
+        <section id="stats-section" class="section" style="display: none;">
+            <h2>Estatísticas do Podcast <i class="fas fa-chart-bar"></i></h2>
+            <p>Simulação: Não há estatísticas reais em um site estático. Use ferramentas de análise externas.</p>
+            <button type="button" id="cancel-stats-btn" class="secondary-btn">Voltar ao Painel</button>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Sem Roteiros, Só Verdades. Todos os direitos reservados. Fofocas com responsabilidade? Nah! <i class="fas fa-laugh-wink"></i></p>
+    </footer>
+
+    <script>
+        // Variável global para armazenar o ID do intervalo de atualização
+        let chatUpdateInterval;
+
+        // --- FUNÇÕES DE CHAT ---
+        function getChatMessages() {
+            const chatJson = localStorage.getItem('podcastChat');
+            return chatJson ? JSON.parse(chatJson) : [];
+        }
+
+        function saveChatMessages(messages) {
+            localStorage.setItem('podcastChat', JSON.stringify(messages));
+        }
+        
+        let lastScrollHeight = 0;
+        let shouldScroll = true;
+
+        function loadChatMessages() {
+            const messages = getChatMessages();
+            const adminDisplay = document.getElementById('admin-chat-display');
+            const memberDisplay = document.getElementById('member-chat-display');
+            
+            const chatHtml = messages.map(msg => {
+                const isAdmin = msg.user === 'Admin';
+                const userName = isAdmin ? `Admin (${msg.adminNick || '??'})` : msg.user;
+                const className = isAdmin ? 'admin-msg' : '';
+                return `
+                    <div class="chat-message ${className}">
+                        <strong>${userName}:</strong> ${msg.text}
+                    </div>
+                `;
+            }).join('');
+
+            // Função para atualizar e rolar (se estiver no fim)
+            const updateAndScroll = (display) => {
+                if (!display) return;
+                
+                // Verifica se a rolagem estava no final antes de atualizar
+                const isScrolledToBottom = display.scrollHeight - display.clientHeight <= display.scrollTop + 1;
+                
+                display.innerHTML = chatHtml || '<p style="color: #aaa;">Nenhum comentário...</p>';
+                
+                // Rola para o final se a rolagem estava no final OU se é a primeira carga
+                if (isScrolledToBottom || lastScrollHeight === 0) {
+                    display.scrollTop = display.scrollHeight;
+                }
+                lastScrollHeight = display.scrollHeight;
+            };
+
+            updateAndScroll(adminDisplay);
+            updateAndScroll(memberDisplay);
+        }
+        
+        function startChatAutoUpdate() {
+             // Limpa o intervalo anterior se existir
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
+            }
+            // Define o novo intervalo de atualização (a cada 3000ms = 3 segundos)
+            chatUpdateInterval = setInterval(loadChatMessages, 3000);
+        }
+        
+        function stopChatAutoUpdate() {
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
+                chatUpdateInterval = null;
+            }
+        }
+        
+        // Função universal de envio de mensagem
+        function sendMessage(e, isAdmin) {
+            e.preventDefault();
+            
+            const inputElement = isAdmin ? document.getElementById('chat-input') : document.getElementById('member-chat-input');
+            const message = inputElement.value.trim();
+            const nickname = localStorage.getItem('userNickname');
+
+            if (message) {
+                let messages = getChatMessages();
+                
+                const newMessage = {
+                    user: isAdmin ? 'Admin' : nickname,
+                    text: message,
+                    adminNick: isAdmin ? nickname : undefined // Salva o nick do admin
+                };
+
+                messages.push(newMessage);
+                saveChatMessages(messages);
+                
+                inputElement.value = ''; // Limpa o input
+                loadChatMessages(); // Recarrega para mostrar a nova mensagem imediatamente
+            }
+        }
+        
+        function clearChatHistory() {
+            if (confirm('Tem certeza que deseja limpar todo o histórico do chat ao vivo?')) {
+                localStorage.removeItem('podcastChat');
+                loadChatMessages();
+                alert('Histórico do chat limpo com sucesso.');
+            }
+        }
+        
+        // --- FUNÇÕES DE LOGIN/EPISÓDIOS/ETC (Mantidas ou Levemente Alteradas) ---
+        function getEpisodes() {
+            const episodesJson = localStorage.getItem('podcastEpisodes');
+            return episodesJson ? JSON.parse(episodesJson) : [];
+        }
+
+        function saveEpisodes(episodes) {
+            localStorage.setItem('podcastEpisodes', JSON.stringify(episodes));
+        }
+
+        function loadEpisodes() {
+            const episodes = getEpisodes();
+            const episodesSection = document.getElementById('episodios');
+            // ... (restante da lógica de loadEpisodes) ...
+        }
+        
+        function login() {
+            const password = document.getElementById('password').value;
+            const nickname = document.getElementById('nickname').value.trim();
+            
+            if (!nickname) {
+                alert('Por favor, digite seu Nick/Nome para entrar.');
+                return;
+            }
+            
+            if (!password) {
+                alert('Por favor, digite a senha.');
+                return;
+            }
+
+            const loginContainer = document.getElementById('login');
+            const userContent = document.getElementById('user-content');
+            const adminContent = document.getElementById('admin-content');
+            
+            // Salva o nickname no LocalStorage
+            localStorage.setItem('userNickname', nickname);
+
+            if (password === 'podcast') {
+                loginContainer.style.display = 'none';
+                userContent.classList.add('show');
+                document.getElementById('display-nickname').textContent = nickname;
+                loadEpisodes(); 
+                startChatAutoUpdate(); // Inicia atualização automática
+            } else if (password === 'srsv') {
+                loginContainer.style.display = 'none';
+                adminContent.classList.add('show');
+                document.getElementById('display-admin-nickname').textContent = nickname;
+                showAdminSection('admin-main-section'); 
+                loadEpisodes();
+                startChatAutoUpdate(); // Inicia atualização automática
+            } else {
+                alert('Senha incorreta! Tente novamente. 😅');
+                localStorage.removeItem('userNickname');
+            }
+        }
+        
+        function showAdminSection(sectionIdToShow) {
+            const sections = ['admin-main-section', 'chat-admin-section', 'add-episode-section', 'search-edit-section', 'stats-section'];
+            sections.forEach(id => {
+                document.getElementById(id).style.display = (id === sectionIdToShow) ? 'block' : 'none';
+            });
+            document.getElementById('edit-form').style.display = 'none';
+        }
+        
+        // ... (restante das funções de Edição/Apagar e Navegação - Manter) ...
+        function searchEpisodeAndShowForm(e) { /* ... */ }
+        function saveEditedEpisode(e) { /* ... */ }
+        function deleteEpisode() { /* ... */ }
+        function handleNavigation(e) { /* ... */ }
+        
+        // --- INICIALIZAÇÃO E LÓGICA DE EVENTOS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEpisodes(); 
+            loadChatMessages();
+            
+            // Navegação
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', handleNavigation);
+            });
+
+            // Referências de Botões/Forms
+            const chatBtn = document.getElementById('chat-btn');
+            const chatForm = document.getElementById('chat-form');
+            const memberChatForm = document.getElementById('member-chat-form'); // NOVO
+            const clearChatBtn = document.getElementById('clear-chat-btn');
+            const cancelChatBtn = document.getElementById('cancel-chat-btn');
+
+            // ... (restante dos botões admin) ...
+
+            // 1. Ações do Painel Principal
+            if (chatBtn) chatBtn.addEventListener('click', () => showAdminSection('chat-admin-section'));
+            // ...
+
+            // 2. Ações de Cancelamento/Voltar
+            if (cancelChatBtn) cancelChatBtn.addEventListener('click', () => showAdminSection('admin-main-section'));
+            // ...
+
+            // 3. Ações de Chat
+            if (chatForm) chatForm.addEventListener('submit', (e) => sendMessage(e, true)); // Admin envia
+            if (memberChatForm) memberChatForm.addEventListener('submit', (e) => sendMessage(e, false)); // Membro envia
+            if (clearChatBtn) clearChatBtn.addEventListener('click', clearChatHistory);
+            
+            // ... (restante da inicialização) ...
+        });
+    </script>
+</body>
+</html>
