@@ -22,8 +22,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
         header {
+            /* Ajuste o padding para diminuir a altura do header sem a nav */
             background: rgba(0, 0, 0, 0.95);
-            padding: 30px 20px;
+            padding: 20px; 
             text-align: center;
             box-shadow: 0 8px 25px rgba(139, 0, 139, 0.3);
             backdrop-filter: blur(15px);
@@ -38,42 +39,8 @@
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px #C71585;
             letter-spacing: 2px;
         }
-        nav {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.4s ease;
-            padding: 10px 15px;
-            border-radius: 25px;
-            position: relative;
-            overflow: hidden;
-        }
-        nav a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(139, 0, 139, 0.5), transparent);
-            transition: left 0.5s;
-        }
-        nav a:hover::before {
-            left: 100%;
-        }
-        nav a:hover {
-            color: #C71585;
-            transform: scale(1.1);
-            text-shadow: 0 0 10px #C71585;
-        }
+        /* REMOVEMOS TODOS OS ESTILOS RELACIONADOS AO <NAV> E NAV A */
+
         .login-container {
             display: flex;
             justify-content: center;
@@ -180,8 +147,10 @@
             box-shadow: 0 8px 25px rgba(139, 0, 139, 0.5);
         }
         .content {
+            /* Compensar a altura do header, mas agora o cálculo é mais simples */
+            padding-top: 20px; 
+            padding-bottom: 80px; /* Adicionado padding para o footer não esconder o conteúdo */
             display: none;
-            padding: 60px 20px;
             text-align: center;
             animation: fadeIn 1.5s ease-in;
         }
@@ -233,9 +202,65 @@
             position: relative;
             overflow: hidden;
         }
-        /* ... outros estilos de episódio ... */
-        
-        /* ESTILOS DO CHAT */
+        .episode::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 139, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        .episode:hover::before {
+            left: 100%;
+        }
+        .episode:hover {
+            transform: scale(1.08) rotate(1deg);
+            box-shadow: 0 10px 30px rgba(139, 0, 139, 0.4);
+        }
+        .episode img {
+            width: 100%;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .episode:hover img {
+            transform: scale(1.05);
+        }
+        .admin-options {
+            display: none;
+        }
+        .admin-options.show {
+            display: block;
+        }
+        /* ESTILOS ADMIN (Mantidos) */
+        .admin-options .section button {
+            margin: 10px 15px; 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+        }
+        /* ... outros estilos de forms e botões ... */
+        .secondary-btn {
+            background: #555 !important;
+            margin-left: 15px;
+        }
+        .secondary-btn:hover {
+            background: #777 !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
+        }
+        .delete-btn {
+            background: linear-gradient(45deg, #cc0000, #ff6666) !important;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1em !important;
+            padding: 12px 25px !important;
+        }
+        .delete-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 15px rgba(204, 0, 0, 0.5) !important;
+        }
+        /* ESTILOS DO CHAT (Mantidos) */
         .chat-container {
             max-height: 350px;
             overflow-y: auto;
@@ -268,7 +293,6 @@
         }
         /* Fim estilos CHAT */
 
-        /* ... outros estilos de footer e media queries ... */
         footer {
             background: rgba(0, 0, 0, 0.95);
             text-align: center;
@@ -295,14 +319,7 @@
 <body>
     <header>
         <h1><i class="fas fa-microphone"></i> Sem Roteiros, Só Verdades</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#chat">Chat Ao Vivo</a>
-            <a href="#episodios">Episódios</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </header>
+        </header>
 
     <div class="login-container" id="login">
         <div class="login-box">
@@ -337,13 +354,34 @@
         </section>
 
         <section id="episodios" class="section">
-            </section>
+            <h2>Episódios Recentes <i class="fas fa-play-circle"></i></h2>
+            <div class="episode">
+                <img src="https://via.placeholder.com/300x200?text=Fofoca+1" alt="Episódio 1">
+                <h3>Episódio 1: Quem traiu quem?</h3>
+                <p>Descubra os segredos mais quentes da cidade! <i class="fas fa-exclamation-triangle"></i></p>
+            </div>
+            <div class="episode">
+                <img src="https://via.placeholder.com/300x200?text=Fofoca+2" alt="Episódio 2">
+                <h3>Episódio 2: Celebridades em apuros</h3>
+                <p>Falando mal de quem você menos espera! <i class="fas fa-star"></i></p>
+            </div>
+            <div class="episode">
+                <img src="https://via.placeholder.com/300x200?text=Fofoca+3" alt="Episódio 3">
+                <h3>Episódio 3: Vizinhos escandalosos</h3>
+                <p>Histórias que vão te deixar de boca aberta! <i class="fas fa-surprise"></i></p>
+            </div>
+        </section>
 
         <section id="sobre" class="section">
-            </section>
+            <h2>Sobre Nós <i class="fas fa-info-circle"></i></h2>
+            <p>Sem Roteiros, Só Verdades é o podcast onde a verdade dói, mas diverte! Apresentado por hosts sem filtro, trazendo fofocas fresquinhas e comentários ácidos sobre tudo e todos.</p>
+        </section>
 
         <section id="contato" class="section">
-            </section>
+            <h2>Contato <i class="fas fa-envelope"></i></h2>
+            <p>Envie suas fofocas anônimas para:</p>
+            <p>Siga-nos no Instagram:</p>
+        </section>
     </div>
 
     <div class="content admin-options" id="admin-content">
@@ -455,7 +493,6 @@
         }
         
         let lastScrollHeight = 0;
-        let shouldScroll = true;
 
         function loadChatMessages() {
             const messages = getChatMessages();
@@ -523,14 +560,14 @@
                 const newMessage = {
                     user: isAdmin ? 'Admin' : nickname,
                     text: message,
-                    adminNick: isAdmin ? nickname : undefined // Salva o nick do admin
+                    adminNick: isAdmin ? nickname : undefined 
                 };
 
                 messages.push(newMessage);
                 saveChatMessages(messages);
                 
-                inputElement.value = ''; // Limpa o input
-                loadChatMessages(); // Recarrega para mostrar a nova mensagem imediatamente
+                inputElement.value = ''; 
+                loadChatMessages(); 
             }
         }
         
@@ -542,7 +579,7 @@
             }
         }
         
-        // --- FUNÇÕES DE LOGIN/EPISÓDIOS/ETC (Mantidas ou Levemente Alteradas) ---
+        // --- FUNÇÕES DE LOGIN/EPISÓDIOS/ETC ---
         function getEpisodes() {
             const episodesJson = localStorage.getItem('podcastEpisodes');
             return episodesJson ? JSON.parse(episodesJson) : [];
@@ -555,7 +592,29 @@
         function loadEpisodes() {
             const episodes = getEpisodes();
             const episodesSection = document.getElementById('episodios');
-            // ... (restante da lógica de loadEpisodes) ...
+            
+            const defaultEpisodes = Array.from(document.querySelectorAll('#episodios > .episode'));
+            const defaultEpisodesHtml = defaultEpisodes.map(ep => ep.outerHTML).join('');
+
+            const h2Title = episodesSection.querySelector('h2').outerHTML;
+            episodesSection.innerHTML = h2Title;
+
+            if (episodes.length > 0) {
+                episodes.reverse().forEach(ep => {
+                    const episodeHtml = `
+                        <div class="episode">
+                            <img src="${ep.image}" alt="${ep.title}">
+                            <h3>${ep.title}</h3>
+                            <p>${ep.description} <i class="fas fa-star"></i></p>
+                        </div>
+                    `;
+                    episodesSection.innerHTML += episodeHtml;
+                });
+            }
+            
+            if (episodes.length < 3) { 
+                 episodesSection.innerHTML += defaultEpisodesHtml;
+            }
         }
         
         function login() {
@@ -584,14 +643,14 @@
                 userContent.classList.add('show');
                 document.getElementById('display-nickname').textContent = nickname;
                 loadEpisodes(); 
-                startChatAutoUpdate(); // Inicia atualização automática
+                startChatAutoUpdate(); 
             } else if (password === 'srsv') {
                 loginContainer.style.display = 'none';
                 adminContent.classList.add('show');
                 document.getElementById('display-admin-nickname').textContent = nickname;
                 showAdminSection('admin-main-section'); 
                 loadEpisodes();
-                startChatAutoUpdate(); // Inicia atualização automática
+                startChatAutoUpdate(); 
             } else {
                 alert('Senha incorreta! Tente novamente. 😅');
                 localStorage.removeItem('userNickname');
@@ -606,45 +665,159 @@
             document.getElementById('edit-form').style.display = 'none';
         }
         
-        // ... (restante das funções de Edição/Apagar e Navegação - Manter) ...
-        function searchEpisodeAndShowForm(e) { /* ... */ }
-        function saveEditedEpisode(e) { /* ... */ }
-        function deleteEpisode() { /* ... */ }
-        function handleNavigation(e) { /* ... */ }
+        function searchEpisodeAndShowForm(e) {
+            e.preventDefault();
+            const searchTitle = document.getElementById('search-title').value.trim();
+            const episodes = getEpisodes();
+            
+            const episodeToEdit = episodes.find(ep => ep.title === searchTitle);
+            const editForm = document.getElementById('edit-form');
+            
+            if (episodeToEdit) {
+                document.getElementById('current-edit-title').textContent = episodeToEdit.title;
+                document.getElementById('edit-title').value = episodeToEdit.title;
+                document.getElementById('edit-description').value = episodeToEdit.description;
+                document.getElementById('edit-image').value = episodeToEdit.image;
+                document.getElementById('original-title-key').value = episodeToEdit.title;
+                
+                editForm.style.display = 'block';
+            } else {
+                alert(`Episódio com o título "${searchTitle}" não encontrado. Verifique o título exato.`);
+                editForm.style.display = 'none';
+            }
+        }
+
+        function saveEditedEpisode(e) {
+            e.preventDefault();
+            const originalTitle = document.getElementById('original-title-key').value;
+            const newTitle = document.getElementById('edit-title').value;
+            const newDescription = document.getElementById('edit-description').value;
+            const newImage = document.getElementById('edit-image').value;
+
+            let episodes = getEpisodes();
+            const index = episodes.findIndex(ep => ep.title === originalTitle);
+
+            if (index !== -1) {
+                episodes[index].title = newTitle;
+                episodes[index].description = newDescription;
+                episodes[index].image = newImage;
+
+                saveEpisodes(episodes);
+                alert(`Episódio "${newTitle}" editado e salvo com sucesso!`);
+                
+                document.getElementById('edit-form').style.display = 'none';
+                document.getElementById('search-episode-form').reset();
+                showAdminSection('admin-main-section');
+                loadEpisodes(); 
+            } else {
+                alert('Erro ao salvar: Episódio original não encontrado.');
+            }
+        }
         
+        function deleteEpisode() {
+            const titleToDelete = document.getElementById('original-title-key').value;
+            
+            if (!confirm(`Tem certeza que deseja apagar o episódio: "${titleToDelete}"? Esta ação é irreversível!`)) {
+                return;
+            }
+            
+            let episodes = getEpisodes();
+            const updatedEpisodes = episodes.filter(ep => ep.title !== titleToDelete);
+
+            saveEpisodes(updatedEpisodes);
+            
+            alert(`Episódio "${titleToDelete}" apagado com sucesso.`);
+            
+            document.getElementById('edit-form').style.display = 'none';
+            document.getElementById('search-episode-form').reset();
+            showAdminSection('admin-main-section');
+            loadEpisodes();
+        }
+        
+        // REMOVIDA A FUNÇÃO handleNavigation (Não há mais links de navegação)
+
         // --- INICIALIZAÇÃO E LÓGICA DE EVENTOS ---
         document.addEventListener('DOMContentLoaded', () => {
             loadEpisodes(); 
             loadChatMessages();
             
-            // Navegação
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', handleNavigation);
-            });
-
-            // Referências de Botões/Forms
+            // REMOVIDA A ADIÇÃO DE EVENT LISTENER PARA NAV
+            
             const chatBtn = document.getElementById('chat-btn');
             const chatForm = document.getElementById('chat-form');
-            const memberChatForm = document.getElementById('member-chat-form'); // NOVO
+            const memberChatForm = document.getElementById('member-chat-form'); 
             const clearChatBtn = document.getElementById('clear-chat-btn');
             const cancelChatBtn = document.getElementById('cancel-chat-btn');
 
-            // ... (restante dos botões admin) ...
+            const addBtn = document.getElementById('add-episode-btn');
+            const editBtn = document.getElementById('edit-episodes-btn');
+            const statsBtn = document.getElementById('view-stats-btn');
+            const cancelAddBtn = document.getElementById('cancel-add-btn');
+            const cancelSearchBtn = document.getElementById('cancel-search-btn');
+            const cancelStatsBtn = document.getElementById('cancel-stats-btn');
+            const deleteEpisodeBtn = document.getElementById('delete-episode-btn');
+            const searchForm = document.getElementById('search-episode-form');
+            const editForm = document.getElementById('edit-form');
+
 
             // 1. Ações do Painel Principal
             if (chatBtn) chatBtn.addEventListener('click', () => showAdminSection('chat-admin-section'));
-            // ...
+            if (addBtn) addBtn.addEventListener('click', () => showAdminSection('add-episode-section'));
+            if (editBtn) editBtn.addEventListener('click', () => showAdminSection('search-edit-section'));
+            if (statsBtn) statsBtn.addEventListener('click', () => showAdminSection('stats-section'));
 
             // 2. Ações de Cancelamento/Voltar
             if (cancelChatBtn) cancelChatBtn.addEventListener('click', () => showAdminSection('admin-main-section'));
-            // ...
-
+            if (cancelAddBtn) cancelAddBtn.addEventListener('click', () => showAdminSection('admin-main-section'));
+            if (cancelSearchBtn) cancelSearchBtn.addEventListener('click', () => {
+                showAdminSection('admin-main-section');
+                searchForm.reset();
+            });
+            if (cancelStatsBtn) cancelStatsBtn.addEventListener('click', () => showAdminSection('admin-main-section'));
+            
             // 3. Ações de Chat
-            if (chatForm) chatForm.addEventListener('submit', (e) => sendMessage(e, true)); // Admin envia
-            if (memberChatForm) memberChatForm.addEventListener('submit', (e) => sendMessage(e, false)); // Membro envia
+            if (chatForm) chatForm.addEventListener('submit', (e) => sendMessage(e, true)); 
+            if (memberChatForm) memberChatForm.addEventListener('submit', (e) => sendMessage(e, false)); 
             if (clearChatBtn) clearChatBtn.addEventListener('click', clearChatHistory);
             
-            // ... (restante da inicialização) ...
+            // 4. Ação de APAGAR
+            if (deleteEpisodeBtn) {
+                deleteEpisodeBtn.addEventListener('click', deleteEpisode);
+            }
+
+            // 5. Submissão do Formulário de ADIÇÃO
+            if (episodeForm) {
+                episodeForm.addEventListener('submit', (e) => {
+                    e.preventDefault(); 
+                    
+                    const newEpisode = {
+                        title: document.getElementById('episode-title').value,
+                        description: document.getElementById('episode-description').value,
+                        image: document.getElementById('episode-image').value,
+                    };
+
+                    const episodes = getEpisodes();
+                    episodes.push(newEpisode);
+
+                    saveEpisodes(episodes);
+
+                    alert(`Episódio "${newEpisode.title}" publicado com sucesso!`);
+                    episodeForm.reset(); 
+                    
+                    showAdminSection('admin-main-section');
+                    loadEpisodes(); 
+                });
+            }
+
+            // 6. Submissão do Formulário de BUSCA (Editar/Apagar)
+            if (searchForm) {
+                searchForm.addEventListener('submit', searchEpisodeAndShowForm);
+            }
+
+            // 7. Submissão do Formulário de EDIÇÃO (Salvar)
+            if (editForm) {
+                editForm.addEventListener('submit', saveEditedEpisode);
+            }
         });
     </script>
 </body>
